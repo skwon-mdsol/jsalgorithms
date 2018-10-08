@@ -20,7 +20,7 @@ interface LinkedListInterface {
   tail: LLNode;
 
   append(value: string): DoublyLinkedList;
-  // prepend(value: string): DoublyLinkedList;
+  prepend(value: string): DoublyLinkedList;
   list(): string[];
   reverseList(): string[];
   delete(value: string): boolean;
@@ -35,7 +35,21 @@ export default class DoublyLinkedList implements LinkedListInterface {
     this.tail = tail;
   }
 
-  // prepend (value: string): Dou
+  prepend (value: string): DoublyLinkedList {
+    // null head case
+    const newNode = new LLNode(value, null, null);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+      return this
+    }
+
+    this.head.previous = newNode;
+    newNode.next = this.head;
+    this.head = newNode;
+
+    return this;
+  }
 
   append (value: string): DoublyLinkedList {
     const newNode = new LLNode(value, null, null);

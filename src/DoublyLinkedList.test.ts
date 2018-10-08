@@ -1,6 +1,26 @@
 import DoublyLinkedList, { LLNode } from './DoublyLinkedList';
 
 describe('DoublyLinkedList', () => {
+  describe('prepend', () => {
+    let linkedList;
+
+    beforeEach(() => {
+      linkedList = new DoublyLinkedList(null, null);
+    });
+
+    it('adds node to head', () => {
+      linkedList.prepend('1');
+      expect(linkedList.list()).toEqual(['1']);
+    });
+
+    it('adds node to head again', () => {
+      linkedList.append('2');
+      linkedList.append('3');
+      linkedList.append('4');
+      linkedList.prepend('1');
+      expect(linkedList.list()).toEqual(['1', '2', '3', '4']);
+    })
+  });
 
   describe('append', () => {
     let linkedList;
