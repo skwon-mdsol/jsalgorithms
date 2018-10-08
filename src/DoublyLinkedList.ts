@@ -20,7 +20,9 @@ interface LinkedListInterface {
   tail: LLNode;
 
   append(value: string): DoublyLinkedList;
+  // prepend(value: string): DoublyLinkedList;
   list(): string[];
+  reverseList(): string[];
   delete(value: string): boolean;
 }
 
@@ -32,6 +34,8 @@ export default class DoublyLinkedList implements LinkedListInterface {
     this.head = head;
     this.tail = tail;
   }
+
+  // prepend (value: string): Dou
 
   append (value: string): DoublyLinkedList {
     const newNode = new LLNode(value, null, null);
@@ -60,8 +64,42 @@ export default class DoublyLinkedList implements LinkedListInterface {
     return res;
   }
 
+  reverseList (): string[] {
+    let res = [];
+    let node = this.tail;
+    while (node) {
+      res.push(node.value);
+      node = node.previous;
+    }
+    return res;
+  }
+
   delete (value: string): boolean {
-    let node = this.head;
-    return false;
+    let node;
+    if (!this.head) return false;
+
+    if (this.head.value === value) {
+      this.head = null;
+      this.tail = null;
+      return true;
+    }
+
+    node = this.head.next;
+    while (node && node.value !== value) {
+      node = node.next;
+    }
+
+    if (node.value === this.tail.value) {
+      this.tail = this.tail.previous;
+      this.tail.next = null;
+      return true;
+    } else if (node.value === value) {
+      node.previous.next = node.next;
+      node.next.previous = node.previous;
+      node = null;
+      return true;
+    } else {
+      return false;
+    }
   }
 }
