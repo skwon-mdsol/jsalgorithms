@@ -1,10 +1,10 @@
-interface LLNodeInterface {
+interface ILLNode {
   next: LLNode;
   previous: LLNode;
   value: string;
 }
 
-export class LLNode implements LLNodeInterface {
+export class LLNode implements ILLNode {
   next: LLNode;
   previous: LLNode;
   value: string;
@@ -15,7 +15,7 @@ export class LLNode implements LLNodeInterface {
   }
 }
 
-interface LinkedListInterface {
+interface ILinkedList {
   head: LLNode;
   tail: LLNode;
 
@@ -26,7 +26,7 @@ interface LinkedListInterface {
   delete(value: string): boolean;
 }
 
-export default class DoublyLinkedList implements LinkedListInterface {
+export default class DoublyLinkedList implements ILinkedList {
   head: LLNode;
   tail: LLNode;
 
