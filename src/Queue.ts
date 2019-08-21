@@ -1,31 +1,31 @@
-interface IQueue {
-  nodes: any[];
+interface IQueue<T> {
+  nodes: T[];
 
-  enqueue(value: string): boolean;
-  dequeue(): any;
-  list(): any[];
+  enqueue(value: T): boolean;
+  dequeue(): T;
+  list(): T[];
 }
 
-export default class Queue implements IQueue {
-  nodes: any[];
+export default class Queue<T> implements IQueue<T> {
+  nodes: T[];
 
-  constructor (nodes: any[]) {
+  constructor (nodes: T[]) {
     this.nodes = nodes;
   }
 
-  enqueue (value: string): boolean {
+  enqueue (value: T): boolean {
     this.nodes.unshift(value);
     return true;
   }
 
-  dequeue (): any {
+  dequeue (): T {
     if (!this.nodes.length) return null;
     let element = this.nodes[this.nodes.length - 1];
     this.nodes = this.nodes.slice(0, this.nodes.length - 1);
     return element;
   }
 
-  list (): string[] {
+  list (): T[] {
     return this.nodes;
   }
 }

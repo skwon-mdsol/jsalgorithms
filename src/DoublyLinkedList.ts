@@ -1,43 +1,43 @@
-interface ILLNode {
-  next: LLNode;
-  previous: LLNode;
-  value: string;
+interface ILLNode<T> {
+  next: LLNode<T>;
+  previous: LLNode<T>;
+  value: T;
 }
 
-export class LLNode implements ILLNode {
-  next: LLNode;
-  previous: LLNode;
-  value: string;
+export class LLNode<T> implements ILLNode<T> {
+  next: LLNode<T>;
+  previous: LLNode<T>;
+  value: T;
 
-  constructor(value: string, next: LLNode, previous: LLNode) {
+  constructor(value: T, next: LLNode<T>, previous: LLNode<T>) {
     this.value = value;
     this.next = next;
   }
 }
 
-interface ILinkedList {
-  head: LLNode;
-  tail: LLNode;
+interface ILinkedList<T> {
+  head: LLNode<T>;
+  tail: LLNode<T>;
 
-  append(value: string): DoublyLinkedList;
-  prepend(value: string): DoublyLinkedList;
-  list(): string[];
-  reverseList(): string[];
-  delete(value: string): boolean;
+  append(value: T): DoublyLinkedList<T>;
+  prepend(value: T): DoublyLinkedList<T>;
+  list(): T[];
+  reverseList(): T[];
+  delete(value: T): boolean;
 }
 
-export default class DoublyLinkedList implements ILinkedList {
-  head: LLNode;
-  tail: LLNode;
+export default class DoublyLinkedList<T> implements ILinkedList<T> {
+  head: LLNode<T>;
+  tail: LLNode<T>;
 
-  constructor (head: LLNode, tail: LLNode) {
+  constructor (head: LLNode<T>, tail: LLNode<T>) {
     this.head = head;
     this.tail = tail;
   }
 
-  prepend (value: string): DoublyLinkedList {
+  prepend (value: T): DoublyLinkedList<T> {
     // null head case
-    const newNode = new LLNode(value, null, null);
+    const newNode = new LLNode<T>(value, null, null);
     if (!this.head) {
       this.head = newNode;
       this.tail = newNode;
@@ -51,7 +51,7 @@ export default class DoublyLinkedList implements ILinkedList {
     return this;
   }
 
-  append (value: string): DoublyLinkedList {
+  append (value: T): DoublyLinkedList<T> {
     const newNode = new LLNode(value, null, null);
 
     // if no head node exists
@@ -68,7 +68,7 @@ export default class DoublyLinkedList implements ILinkedList {
     return this;
   }
 
-  list (): string[] {
+  list(): T[] {
     let node = this.head;
     let res = [];
     while (node) {
@@ -78,7 +78,7 @@ export default class DoublyLinkedList implements ILinkedList {
     return res;
   }
 
-  reverseList (): string[] {
+  reverseList(): T[] {
     let res = [];
     let node = this.tail;
     while (node) {
@@ -88,7 +88,7 @@ export default class DoublyLinkedList implements ILinkedList {
     return res;
   }
 
-  delete (value: string): boolean {
+  delete(value: T): boolean {
     let node;
     if (!this.head) return false;
 
